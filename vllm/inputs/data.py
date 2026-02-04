@@ -86,6 +86,16 @@ class TokensPrompt(TypedDict):
     """
 
 
+class GRTokensPrompt(TokensPrompt):
+    """Schema for a GR request tokenized prompt."""
+
+    additional_information: NotRequired[dict[str, Any]]
+    """additional information of GR model input."""
+
+    prompt_embs: NotRequired[Optional[torch.Tensor]]
+    """The embedding of prompt."""
+
+
 class EmbedsPrompt(TypedDict):
     """Schema for a prompt provided via token embeddings."""
 

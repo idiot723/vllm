@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
 
+import os
 import itertools
 from collections.abc import Iterable
 from dataclasses import dataclass
@@ -104,6 +105,10 @@ class LogprobsProcessor:
         # Prompt logprobs are enabled.
         assert self.num_prompt_logprobs is not None
         assert self.prompt_logprobs is not None
+
+        if os.getenv('PROMPT_LOGPROBS_USE_TENSOR'):
+            self.prompt_logprobs.append(prompt_logprobs_tensors.logprobs)
+            return
 
         token_ids, logprobs, ranks = prompt_logprobs_tensors
 

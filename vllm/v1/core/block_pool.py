@@ -214,7 +214,7 @@ class BlockPool:
         if num_cached_blocks == num_full_blocks:
             return
         new_full_blocks = blocks[num_cached_blocks:num_full_blocks]
-        assert len(request.block_hashes) >= num_full_blocks
+        assert len(request.block_hashes) >= num_cached_blocks
         new_block_hashes = request.block_hashes[num_cached_blocks:]
 
         new_hashes: Optional[list[ExternalBlockHash]] = (

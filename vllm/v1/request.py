@@ -29,6 +29,7 @@ class Request:
         self,
         request_id: str,
         prompt_token_ids: Optional[list[int]],
+        additional_information: Optional[dict[str, Any]],
         sampling_params: Optional[SamplingParams],
         pooling_params: Optional[PoolingParams],
         eos_token_id: Optional[int],
@@ -63,6 +64,8 @@ class Request:
 
         # P/D: Connector-specific KV transfer parameters.
         self.kv_transfer_params: Optional[dict[str, Any]] = None
+
+        self.additional_information = additional_information
 
         if pooling_params is not None:
             # Pooling models.
@@ -131,6 +134,7 @@ class Request:
             request_id=request.request_id,
             client_index=request.client_index,
             prompt_token_ids=request.prompt_token_ids,
+            additional_information=request.additional_information,
             prompt_embeds=request.prompt_embeds,
             mm_features=request.mm_features,
             sampling_params=request.sampling_params,

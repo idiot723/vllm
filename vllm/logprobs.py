@@ -1,8 +1,10 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, Union
 
+import torch
+import torch_npu
 
 # We use dataclass for now because it is used for
 # openai server output, and msgspec is not serializable.
@@ -23,6 +25,6 @@ class Logprob:
 
 # {token_id -> logprob} per each sequence group. None if the corresponding
 # sequence group doesn't require prompt logprob.
-PromptLogprobs = list[Optional[dict[int, Logprob]]]
+PromptLogprobs = list[Optional[Union[dict[int, Logprob], torch.Tensor]]]
 # {token_id -> logprob} for each sequence group.
 SampleLogprobs = list[dict[int, Logprob]]

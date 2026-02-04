@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, Optional, Any
 
 from vllm._bc_linter import bc_linter_include
 
@@ -28,6 +28,7 @@ class NewRequestData:
 
     req_id: str
     prompt_token_ids: Optional[list[int]]
+    additional_information: Optional[dict[str, Any]]
     mm_features: list[MultiModalFeatureSpec]
     sampling_params: Optional[SamplingParams]
     pooling_params: Optional[PoolingParams]
@@ -45,6 +46,7 @@ class NewRequestData:
         return cls(
             req_id=request.request_id,
             prompt_token_ids=request.prompt_token_ids,
+            additional_information=request.additional_information,
             mm_features=request.mm_features,
             sampling_params=request.sampling_params,
             pooling_params=request.pooling_params,
@@ -101,6 +103,7 @@ class CachedRequestData:
     new_token_ids: list[list[int]]
     new_block_ids: list[Optional[tuple[list[int], ...]]]
     num_computed_tokens: list[int]
+    additional_information: list[dict]
 
     @property
     def num_reqs(self) -> int:
@@ -114,6 +117,7 @@ class CachedRequestData:
             new_token_ids=[],
             new_block_ids=[],
             num_computed_tokens=[],
+            additional_information=[],
         )
 
 
