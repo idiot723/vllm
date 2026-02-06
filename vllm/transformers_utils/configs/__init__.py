@@ -34,7 +34,7 @@ from vllm.transformers_utils.configs.step3_vl import (Step3TextConfig,
                                                       Step3VisionEncoderConfig,
                                                       Step3VLConfig)
 from vllm.transformers_utils.configs.ultravox import UltravoxConfig
-from vllm.transformers_utils.config.hstu_config import HSTUInferenceRankingConfig
+from vllm.transformers_utils.configs.hstu_config import HSTUInferenceRankingConfig
 
 __all__ = [
     "ChatGLMConfig",
